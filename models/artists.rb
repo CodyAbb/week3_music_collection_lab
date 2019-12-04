@@ -5,7 +5,7 @@ class Artist
 
   attr_reader :id, :stage_name
 
-  def intialize( options )
+  def initialize( options )
     @id = options['id'].to_i if options ['id']
     @stage_name = options['stage_name']
   end
@@ -22,6 +22,11 @@ class Artist
     values = [@stage_name]
     result = SqlRunner.run(sql, values)
     @id = result[0]['id'].to_i
+  end
+
+  def self.delete_all()
+    sql = "DELETE FROM artists"
+    result = SqlRunner.run(sql)
   end
 
 
