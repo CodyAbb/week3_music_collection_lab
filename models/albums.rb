@@ -1,4 +1,5 @@
-require('pg')
+require_relative('../db/sql_runner')
+require_relative('./artists')
 
 class Album
 
@@ -30,6 +31,12 @@ class Album
   def self.delete_all()
     sql = "DELETE FROM albums"
     result = SqlRunner.run(sql)
+  end
+
+  def self.all()
+    sql = "SELECT * FROM albums"
+    albums = SqlRunner.run(sql)
+    return albums.map { |album| Album.new(album) }
   end
 
 end
